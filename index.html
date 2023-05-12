@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Peta Sebaran COVID-19 di Indonesia</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+    /* Set the size of div element that contain the map */
+    html, body, #mapCanvas {
+        height: 500px;
+        margin: 0px;
+        padding: 0px;
+    }
+    </style>
+
+    <!-- Google Maps Javascript API -->
+    <script src="https://maps.googleapis.com/maps/api/js?callback=initMap&key
+    =AIzaSyCB6wR7te2AfDmiITyC1y6cJZHtz0IhwPE" defer></script>
+
+    <script>
+      // Initialize and add the map
+      function initMap() {
+
+          // Latitude and longitude of the selected location
+          const center_indo = { lat: -1.200731, lng: 116.137817}
+          const Aceh = { lat: 4.695135, lng: 96.7493993 };
+          const Bali = { lat: -8.4095178, lng: 115.188916 };
+          const Bangka_Belitung = { lat: -2.7410513, lng: 106.4405872 };
+          const Banten = { lat: -6.4058172, lng: 106.0640179 };
+          const Bengkulu = { lat: -3.5778471, lng: 102.3463875 };
+          const Central_Java = { lat: -7.150975, lng: 110.1402594 };
+          const Central_Kalimantan = { lat: -1.6814878, lng: 113.3823545 };
+          const Central_Sulawesi = { lat: -1.4300254, lng: 121.4456179 };
+          const East_Java = { lat: -7.5360639, lng: 112.2384017 };
+          const East_Kalimantan = { lat: 1.6406296, lng: 116.419389 };
+          const East_Nusa_Tenggara = { lat: -8.6573819, lng: 121.0793705 };
+          const Gorontalo = { lat: 0.6999372, lng: 122.4467238 };
+          const Jakarta = { lat: -6.211544, lng: 106.845172 };
+          const Jambi = { lat: -1.4851831, lng: 102.4380581 };
+          const Lampung = { lat: -4.5585849, lng: 105.4068079 };
+          const Maluku = { lat: -3.2384616, lng: 130.1452734 };
+          const North_Kalimantan = { lat: 1.5802128, lng: 114.0308546 };
+          const North_Maluku = { lat: 1.5709993, lng: 127.8087693 };
+          const North_Sulawesi = { lat: 0.6246932, lng: 123.9750018 };
+          const North_Sumatera = { lat: 2.1153547, lng: 99.5450974 };
+          const Papua = { lat: -4.269928, lng: 138.0803529 };
+          const Riau = { lat: 0.2933469, lng: 101.7068294 };
+          const Riau_Islands = { lat: 3.9456514, lng: 108.1428669 };
+          const South_Kalimantan = { lat: -3.0926415, lng: 115.2837585 };
+          const South_Sulawesi = { lat: -3.6687994, lng: 119.9740534 };
+          const South_Sumatera = { lat: -3.3194374, lng: 103.914399 };
+          const Southeast_Sulawesi = { lat: -4.14491, lng: 122.174605 };
+          const Yogyakarta = { lat: -7.8753849, lng: 110.4262088 };
+          const West_Java = { lat: -7.090911, lng: 107.668887 };
+          const West_Kalimantan = { lat: -0.2787808, lng: 111.4752851 };
+          const West_Nusa_Tenggara = { lat: -8.6529334, lng: 117.3616476 };
+          const West_Papua = { lat: -1.3361154, lng: 133.1747162 };
+          const West_Sulawesi = { lat: -2.8441371, lng: 119.2320784 };
+          const West_Sumatera = { lat: -0.739940, lng: 100.800005 };
+
+          // The map, centered at selected location
+          const map = new google.maps.Map(document.getElementById("mapCanvas"), {
+              zoom: 5,
+              center: center_indo
+          });
+        
+          // Info window content
+          var contentString_Aceh = '<div id="content">'+
+                                      '<p style="margin-left:3px">12/05/2023 12:00 WIB'+
+                                      '<h1 style="font-size:20px; margin-left:3px">Aceh</h1>'+
+                                        '<div id="bodyContent">'+ 
+                                          '<div style="float:left; width:20%; margin-left:3px;"><img src="images/gambar_gedung/Aceh.jpg" width="120" height="80"/></div>' +
+                                            '<div style="float:right; width:45%;margin-top: -17px;">'+
+                                              '<p style="color:red"> <b>Total Kasus: 44842<b/> <br>'+
+                                              '<p style="color:green"> <b>Sembuh:      42515<b/> <br>'+
+                                              '<p> <b>Meninggal:   2263 <b/> '+
+                                            '</div>'+
+                                        '</div>'+
+                                      '</div>';
+          
+          var contentString_Bali = '<div id="content">'+
+                                      '<p style="margin-left:3px">12/05/2023 12:00 WIB'+
+                                      '<h1 style="font-size:20px;  margin-left:3px">Bali</h1>'+
+                                        '<div id="bodyContent">'+ 
+                                          '<div style="float:left; width:20%; margin-left:3px;"><img src="images/gambar_gedung/Bali.jpg" width="120" height="80"/></div>' +
+                                            '<div style="float:right; width:45%;margin-top: -17px;">'+
+                                              '<p style="color:red"> <b>Total Kasus: 172387 <b/> <br>'+
+                                              '<p style="color:green">    <b>Sembuh: 167356 <b/> <br>'+
+                                              '<p>                     <b>Meninggal:   4866 <b/> '+
+                                            '</div>'+
+                                        '</div>'+
+                                      '</div>';
+
+          var contentString_Bangka_Belitung = '<div id="content">'+
+                                      '<p style="margin-left:3px">12/05/2023 12:00 WIB'+
+                                      '<h1 style="font-size:20px;  margin-left:3px">Bangka Belitung</h1>'+
+                                        '<div id="bodyContent">'+ 
+                                          '<div style="float:left; width:20%; margin-left:3px;"><img src="images/gambar_gedung/Bangka_Belitung.jpg" width="120" height="80"/></div>' +
+                                            '<div style="float:right; width:45%;margin-top: -17px;">'+
+                                              '<p style="color:red"> <b>Total Kasus: 67135 <b/> <br>'+
+                                              '<p style="color:green">    <b>Sembuh: 65405 <b/> <br>'+
+                                              '<p>                     <b>Meninggal:  1651 <b/> '+
+                                            '</div>'+
+                                        '</div>'+
+                                      '</div>';
+
+          var contentString_Banten = '<div id="content">'+
+                                      '<p style="margin-left:3px">12/05/2023 12:00 WIB'+
+                                      '<h1 style="font-size:20px;  margin-left:3px">Banten</h1>'+
+                                        '<div id="bodyContent">'+ 
+                                          '<div style="float:left; width:20%; margin-left:3px;"><img src="images/gambar_gedung/Banten.jpg" width="120" height="80"/></div>' +
+                                            '<div style="float:right; width:45%;margin-top: -17px;">'+
+                                              '<p style="color:red"> <b>Total Kasus: 364679 <b/> <br>'+
+                                              '<p style="color:green">    <b>Sembuh: 361040 <b/> <br>'+
+                                              '<p>                     <b>Meninggal:  2986 <b/> '+
+                                            '</div>'+
+                                        '</div>'+
+                                      '</div>';
+
+          var contentString_Bengkulu = '<div id="content">'+
+                                      '<p style="margin-left:3px">12/05/2023 12:00 WIB'+
+                                      '<h1 style="font-size:20px;  margin-left:3px">Bengkulu/h1>'+
+                                        '<div id="bodyContent">'+ 
+                                          '<div style="float:left; width:20%; margin-left:3px;"><img src="images/gambar_gedung/Bengkulu.jpg" width="120" height="80"/></div>' +
+                                            '<div style="float:right; width:45%;margin-top: -17px;">'+
+                                              '<p style="color:red"> <b>Total Kasus: 29838 <b/> <br>'+
+                                              '<p style="color:green">    <b>Sembuh: 29257 <b/> <br>'+
+                                              '<p>                     <b>Meninggal:  528 <b/> '+
+                                            '</div>'+
+                                        '</div>'+
+                                      '</div>';
+
+          var contentString_Central_Java = '<div id="content">'+
+                                      '<p style="margin-left:3px">12/05/2023 12:00 WIB'+
+                                      '<h1 style="font-size:20px;  margin-left:3px">Central Java</h1>'+
+                                        '<div id="bodyContent">'+ 
+                                          '<div style="float:left; width:20%; margin-left:3px;"><img src="images/gambar_gedung/Central_Java.jpg" width="120" height="80"/></div>' +
+                                            '<div style="float:right; width:45%;margin-top: -17px;">'+
+                                              '<p style="color:red"> <b>Total Kasus: 655026 <b/> <br>'+
+                                              '<p style="color:green">    <b>Sembuh: 617919 <b/> <br>'+
+                                              '<p>                     <b>Meninggal:  33956 <b/> '+
+                                            '</div>'+
+                                        '</div>'+
+                                      '</div>';
+
+          var contentString_Central_Kalimantan = '<div id="content">'+
+                                      '<p style="margin-left:3px">12/05/2023 12:00 WIB'+
+                                      '<h1 style="font-size:20px;  margin-left:3px">Central Kalimantan</h1>'+
+                                        '<div id="bodyContent">'+ 
+                                          '<div style="float:left; width:20%; margin-left:3px;"><img src="images/gambar_gedung/Central_Kalimantan.jpg" width="120" height="80"/></div>' +
+                                            '<div style="float:right; width:45%;margin-top: -17px;">'+
+                                              '<p style="color:red"> <b>Total Kasus: 59291 <b/> <br>'+
+                                              '<p style="color:green">    <b>Sembuh: 57683 <b/> <br>'+
+                                              '<p>                     <b>Meninggal:  1555 <b/> '+
+                                            '</div>'+
+                                        '</div>'+
+                                      '</div>';
+
+          var contentString_Central_Sulawesi = '<div id="content">'+
+                                      '<p style="margin-left:3px">12/05/2023 12:00 WIB'+
+                                      '<h1 style="font-size:20px;  margin-left:3px">Central Sulawesi</h1>'+
+                                        '<div id="bodyContent">'+ 
+                                          '<div style="float:left; width:20%; margin-left:3px;"><img src="images/gambar_gedung/Central_Sulawesi.jpeg" width="120" height="80"/></div>' +
+                                            '<div style="float:right; width:45%;margin-top: -17px;">'+
+                                              '<p style="color:red"> <b>Total Kasus: 62894 <b/> <br>'+
+                                              '<p style="color:green">    <b>Sembuh: 60983 <b/> <br>'+
+                                              '<p>                     <b>Meninggal:  1752 <b/> '+
+                                            '</div>'+
+                                        '</div>'+
+                                      '</div>';
+
+          var contentString_East_Java = '<div id="content">'+
+                                      '<p style="margin-left:3px">12/05/2023 12:00 WIB'+
+                                      '<h1 style="font-size:20px;  margin-left:3px">East Java</h1>'+
+                                        '<div id="bodyContent">'+ 
+                                          '<div style="float:left; width:20%; margin-left:3px;"><img src="images/gambar_gedung/East_Java.jpeg" width="120" height="80"/></div>' +
+                                            '<div style="float:right; width:45%;margin-top: -17px;">'+
+                                              '<p style="color:red"> <b>Total Kasus: 636284 <b/> <br>'+
+                                              '<p style="color:green">    <b>Sembuh: 603328 <b/> <br>'+
+                                              '<p>                     <b>Meninggal:  32224 <b/> '+
+                                            '</div>'+
+                                        '</div>'+
+                                      '</div>';
+
+          var contentString_East_Kalimantan = '<div id="content">'+
+                                      '<p style="margin-left:3px">12/05/2023 12:00 WIB'+
+                                      '<h1 style="font-size:20px;  margin-left:3px">East Kalimantan</h1>'+
+                                        '<div id="bodyContent">'+ 
+                                          '<div style="float:left; width:20%; margin-left:3px;"><img src="images/gambar_gedung/East_Kalimantan.png" width="120" height="80"/></div>' +
+                                            '<div style="float:right; width:45%;margin-top: -17px;">'+
+                                              '<p style="color:red"> <b>Total Kasus: 214380 <b/> <br>'+
+                                              '<p style="color:green">    <b>Sembuh: 208517 <b/> <br>'+
+                                              '<p>                     <b>Meninggal:  5792 <b/> '+
+                                            '</div>'+
+                                        '</div>'+
+                                      '</div>';
+
+          var contentString_East_Nusa_Tenggara = '<div id="content">'+
+                                      '<p style="margin-left:3px">12/05/2023 12:00 WIB'+
+                                      '<h1 style="font-size:20px;  margin-left:3px">East Nusa Tenggara</h1>'+
+                                        '<div id="bodyContent">'+ 
+                                          '<div style="float:left; width:20%; margin-left:3px;"><img src="images/gambar_gedung/East_Nusa_Tenggara.jpg" width="120" height="80"/></div>' +
+                                            '<div style="float:right; width:45%;margin-top: -17px;">'+
+                                              '<p style="color:red"> <b>Total Kasus: 97167 <b/> <br>'+
+                                              '<p style="color:green">    <b>Sembuh: 95485 <b/> <br>'+
+                                              '<p>                     <b>Meninggal:  1564 <b/> '+
+                                            '</div>'+
+                                        '</div>'+
+                                      '</div>';
+
+          var contentString_Gorontalo = '<div id="content">'+
+                                      '<p style="margin-left:3px">12/05/2023 12:00 WIB'+
+                                      '<h1 style="font-size:20px;  margin-left:3px">Gorontalo</h1>'+
+                                        '<div id="bodyContent">'+ 
+                                          '<div style="float:left; width:20%; margin-left:3px;"><img src="images/gambar_gedung/Gorontalo.jpeg" width="120" height="80"/></div>' +
+                                            '<div style="float:right; width:45%;margin-top: -17px;">'+
+                                              '<p style="color:red"> <b>Total Kasus: 14078 <b/> <br>'+
+                                              '<p style="color:green">    <b>Sembuh: 13463 <b/> <br>'+
+                                              '<p>                     <b>Meninggal:   486 <b/> '+
+                                            '</div>'+
+                                        '</div>'+
+                                      '</div>';
+
+          var contentString_Jakarta = '<div id="content">'+
+                                      '<p style="margin-left:3px">12/05/2023 12:00 WIB'+
+                                      '<h1 style="font-size:20px;  margin-left:3px">Jakarta</h1>'+
+                                        '<div id="bodyContent">'+ 
+                                          '<div style="float:left; width:20%; margin-left:3px;"><img src="images/gambar_gedung/Jakarta.jpg" width="120" height="80"/></div>' +
+                                            '<div style="float:right; width:45%;margin-top: -17px;">'+
+                                              '<p style="color:red"> <b>Total Kasus: 1535053 <b/> <br>'+
+                                              '<p style="color:green">    <b>Sembuh: 1517065 <b/> <br>'+
+                                              '<p>                     <b>Meninggal:  15889 <b/> '+
+                                            '</div>'+
+                                        '</div>'+
+                                      '</div>';
+
+          var contentString_Jambi = '<div id="content">'+
+                                      '<p style="margin-left:3px">12/05/2023 12:00 WIB'+
+                                      '<h1 style="font-size:20px;  margin-left:3px">Jambi</h1>'+
+                                        '<div id="bodyContent">'+ 
+                                          '<div style="float:left; width:20%; margin-left:3px;"><img src="images/gambar_gedung/Jambi.jpg" width="120" height="80"/></div>' +
+                                            '<div style="float:right; width:45%;margin-top: -17px;">'+
+                                              '<p style="color:red"> <b>Total Kasus: 39394 <b/> <br>'+
+                                              '<p style="color:green">    <b>Sembuh: 38434 <b/> <br>'+
+                                              '<p>                     <b>Meninggal:  913 <b/> '+
+                                            '</div>'+
+                                        '</div>'+
+                                      '</div>';
+
+          var contentString_Lampung = '<div id="content">'+
+                                      '<p style="margin-left:3px">12/05/2023 12:00 WIB'+
+                                      '<h1 style="font-size:20px;  margin-left:3px">Lampung</h1>'+
+                                        '<div id="bodyContent">'+ 
+                                          '<div style="float:left; width:20%; margin-left:3px;"><img src="images/gambar_gedung/Lampung.jpg" width="120" height="80"/></div>' +
+                                            '<div style="float:right; width:45%;margin-top: -17px;">'+
+                                              '<p style="color:red"> <b>Total Kasus: 77999 <b/> <br>'+
+                                              '<p style="color:green">    <b>Sembuh: 73431 <b/> <br>'+
+                                              '<p>                     <b>Meninggal:  4229 <b/> '+
+                                            '</div>'+
+                                        '</div>'+
+                                      '</div>';
+
+          var contentString_Maluku = '<div id="content">'+
+                                      '<p style="margin-left:3px">12/05/2023 12:00 WIB'+
+                                      '<h1 style="font-size:20px;  margin-left:3px">Maluku</h1>'+
+                                        '<div id="bodyContent">'+ 
+                                          '<div style="float:left; width:20%; margin-left:3px;"><img src="images/gambar_gedung/Maluku.jpg" width="120" height="80"/></div>' +
+                                            '<div style="float:right; width:45%;margin-top: -17px;">'+
+                                              '<p style="color:red"> <b>Total Kasus: 18985 <b/> <br>'+
+                                              '<p style="color:green">    <b>Sembuh: 18667 <b/> <br>'+
+                                              '<p>                     <b>Meninggal:  305 <b/> '+
+                                            '</div>'+
+                                        '</div>'+
+                                      '</div>';
+
+          var contentString_North_Kalimantan = '<div id="content">'+
+                                      '<p style="margin-left:3px">12/05/2023 12:00 WIB'+
+                                      '<h1 style="font-size:20px;  margin-left:3px">North Kalimantan</h1>'+
+                                        '<div id="bodyContent">'+ 
+                                          '<div style="float:left; width:20%; margin-left:3px;"><img src="images/gambar_gedung/North_Kalimantan.jpeg" width="120" height="80"/></div>' +
+                                            '<div style="float:right; width:45%;margin-top: -17px;">'+
+                                              '<p style="color:red"> <b>Total Kasus: 46137 <b/> <br>'+
+                                              '<p style="color:green">    <b>Sembuh: 45249 <b/> <br>'+
+                                              '<p>                     <b>Meninggal:  874 <b/> '+
+                                            '</div>'+
+                                        '</div>'+
+                                      '</div>';
+
+          var contentString_North_Maluku = '<div id="content">'+
+                                      '<p style="margin-left:3px">12/05/2023 12:00 WIB'+
+                                      '<h1 style="font-size:20px;  margin-left:3px">North Maluku</h1>'+
+                                        '<div id="bodyContent">'+ 
+                                          '<div style="float:left; width:20%; margin-left:3px;"><img src="images/gambar_gedung/North_Maluku.jpg" width="120" height="80"/></div>' +
+                                            '<div style="float:right; width:45%;margin-top: -17px;">'+
+                                              '<p style="color:red"> <b>Total Kasus: 14867 <b/> <br>'+
+                                              '<p style="color:green">    <b>Sembuh: 14485 <b/> <br>'+
+                                              '<p>                     <b>Meninggal:  335 <b/> '+
+                                            '</div>'+
+                                        '</div>'+
+                                      '</div>';
+
+          var contentString_North_Sulawesi = '<div id="content">'+
+                                      '<p style="margin-left:3px">12/05/2023 12:00 WIB'+
+                                      '<h1 style="font-size:20px;  margin-left:3px">North Sulawesi</h1>'+
+                                        '<div id="bodyContent">'+ 
+                                          '<div style="float:left; width:20%; margin-left:3px;"><img src="images/gambar_gedung/North_Sulawesi.jpeg" width="120" height="80"/></div>' +
+                                            '<div style="float:right; width:45%;margin-top: -17px;">'+
+                                              '<p style="color:red"> <b>Total Kasus: 54339 <b/> <br>'+
+                                              '<p style="color:green">    <b>Sembuh: 52865 <b/> <br>'+
+                                              '<p>                     <b>Meninggal:  1258 <b/> '+
+                                            '</div>'+
+                                        '</div>'+
+                                      '</div>';
+
+          var contentString_North_Sumatera = '<div id="content">'+
+                                      '<p style="margin-left:3px">12/05/2023 12:00 WIB'+
+                                      '<h1 style="font-size:20px;  margin-left:3px">North Sumatera</h1>'+
+                                        '<div id="bodyContent">'+ 
+                                          '<div style="float:left; width:20%; margin-left:3px;"><img src="images/gambar_gedung/North_Sumatera.jpg" width="120" height="80"/></div>' +
+                                            '<div style="float:right; width:45%;margin-top: -17px;">'+
+                                              '<p style="color:red"> <b>Total Kasus: 163512 <b/> <br>'+
+                                              '<p style="color:green">    <b>Sembuh: 159852 <b/> <br>'+
+                                              '<p>                     <b>Meninggal:  3377 <b/> '+
+                                            '</div>'+
+                                        '</div>'+
+                                      '</div>';
+
+          var contentString_Papua = '<div id="content">'+
+                                      '<p style="margin-left:3px">12/05/2023 12:00 WIB'+
+                                      '<h1 style="font-size:20px;  margin-left:3px">Papua</h1>'+
+                                        '<div id="bodyContent">'+ 
+                                          '<div style="float:left; width:20%; margin-left:3px;"><img src="images/gambar_gedung/Papua.jpg" width="120" height="80"/></div>' +
+                                            '<div style="float:right; width:45%;margin-top: -17px;">'+
+                                              '<p style="color:red"> <b>Total Kasus: 51182 <b/> <br>'+
+                                              '<p style="color:green">    <b>Sembuh: 50484 <b/> <br>'+
+                                              '<p>                     <b>Meninggal:  580 <b/> '+
+                                            '</div>'+
+                                        '</div>'+
+                                      '</div>';
+
+          var contentString_Riau = '<div id="content">'+
+                                      '<p style="margin-left:3px">12/05/2023 12:00 WIB'+
+                                      '<h1 style="font-size:20px;  margin-left:3px">Riau</h1>'+
+                                        '<div id="bodyContent">'+ 
+                                          '<div style="float:left; width:20%; margin-left:3px;"><img src="images/gambar_gedung/Riau.jpg" width="120" height="80"/></div>' +
+                                            '<div style="float:right; width:45%;margin-top: -17px;">'+
+                                              '<p style="color:red"> <b>Total Kasus: 154848 <b/> <br>'+
+                                              '<p style="color:green">    <b>Sembuh: 150214 <b/> <br>'+
+                                              '<p>                     <b>Meninggal:  4541 <b/> '+
+                                            '</div>'+
+                                        '</div>'+
+                                      '</div>';
+
+          var contentString_Riau_Islands = '<div id="content">'+
+                                      '<p style="margin-left:3px">12/05/2023 12:00 WIB'+
+                                      '<h1 style="font-size:20px;  margin-left:3px">Riau Islands</h1>'+
+                                        '<div id="bodyContent">'+ 
+                                          '<div style="float:left; width:20%; margin-left:3px;"><img src="images/gambar_gedung/Riau_Islands.jpg" width="120" height="80"/></div>' +
+                                            '<div style="float:right; width:45%;margin-top: -17px;">'+
+                                              '<p style="color:red"> <b>Total Kasus: 71993 <b/> <br>'+
+                                              '<p style="color:green">    <b>Sembuh: 69989 <b/> <br>'+
+                                              '<p>                     <b>Meninggal:  1927 <b/> '+
+                                            '</div>'+
+                                        '</div>'+
+                                      '</div>';
+
+          var contentString_South_Kalimantan = '<div id="content">'+
+                                      '<p style="margin-left:3px">12/05/2023 12:00 WIB'+
+                                      '<h1 style="font-size:20px;  margin-left:3px">South Kalimantan</h1>'+
+                                        '<div id="bodyContent">'+ 
+                                          '<div style="float:left; width:20%; margin-left:3px;"><img src="images/gambar_gedung/South_Kalimantan.jpg" width="120" height="80"/></div>' +
+                                            '<div style="float:right; width:45%;margin-top: -17px;">'+
+                                              '<p style="color:red"> <b>Total Kasus: 88870 <b/> <br>'+
+                                              '<p style="color:green">    <b>Sembuh: 86152 <b/> <br>'+
+                                              '<p>                     <b>Meninggal:  2599 <b/> '+
+                                            '</div>'+
+                                        '</div>'+
+                                      '</div>';
+
+          var contentString_South_Sulawesi = '<div id="content">'+
+                                      '<p style="margin-left:3px">12/05/2023 12:00 WIB'+
+                                      '<h1 style="font-size:20px;  margin-left:3px">South Sulawesi</h1>'+
+                                        '<div id="bodyContent">'+ 
+                                          '<div style="float:left; width:20%; margin-left:3px;"><img src="images/gambar_gedung/South_Sulawesi.jpg" width="120" height="80"/></div>' +
+                                            '<div style="float:right; width:45%;margin-top: -17px;">'+
+                                              '<p style="color:red"> <b>Total Kasus: 148491 <b/> <br>'+
+                                              '<p style="color:green">    <b>Sembuh: 145844 <b/> <br>'+
+                                              '<p>                     <b>Meninggal:  2571 <b/> '+
+                                            '</div>'+
+                                        '</div>'+
+                                      '</div>';
+
+          var contentString_South_Sumatera = '<div id="content">'+
+                                      '<p style="margin-left:3px">12/05/2023 12:00 WIB'+
+                                      '<h1 style="font-size:20px;  margin-left:3px">South Sumatera</h1>'+
+                                        '<div id="bodyContent">'+ 
+                                          '<div style="float:left; width:20%; margin-left:3px;"><img src="images/gambar_gedung/South_Sumatera.png" width="120" height="80"/></div>' +
+                                            '<div style="float:right; width:45%;margin-top: -17px;">'+
+                                              '<p style="color:red"> <b>Total Kasus: 85008 <b/> <br>'+
+                                              '<p style="color:green">    <b>Sembuh: 81398 <b/> <br>'+
+                                              '<p>                     <b>Meninggal:  3455 <b/> '+
+                                            '</div>'+
+                                        '</div>'+
+                                      '</div>';
+
+          var contentString_Southeast_Sulawesi = '<div id="content">'+
+                                      '<p style="margin-left:3px">12/05/2023 12:00 WIB'+
+                                      '<h1 style="font-size:20px;  margin-left:3px">Southeast Sulawesi</h1>'+
+                                        '<div id="bodyContent">'+ 
+                                          '<div style="float:left; width:20%; margin-left:3px;"><img src="images/gambar_gedung/Southeast_Sulawesi.jpg" width="120" height="80"/></div>' +
+                                            '<div style="float:right; width:45%;margin-top: -17px;">'+
+                                              '<p style="color:red"> <b>Total Kasus: 26556 <b/> <br>'+
+                                              '<p style="color:green">    <b>Sembuh: 25925 <b/> <br>'+
+                                              '<p>                     <b>Meninggal:  585 <b/> '+
+                                            '</div>'+
+                                        '</div>'+
+                                      '</div>';
+
+          var contentString_Yogyakarta = '<div id="content">'+
+                                      '<p style="margin-left:3px">12/05/2023 12:00 WIB'+
+                                      '<h1 style="font-size:20px;  margin-left:3px">Yogyakarta</h1>'+
+                                        '<div id="bodyContent">'+ 
+                                          '<div style="float:left; width:20%; margin-left:3px;"><img src="images/gambar_gedung/Yogyakarta.jpg" width="120" height="80"/></div>' +
+                                            '<div style="float:right; width:45%;margin-top: -17px;">'+
+                                              '<p style="color:red"> <b>Total Kasus: 230005 <b/> <br>'+
+                                              '<p style="color:green">    <b>Sembuh: 223228 <b/> <br>'+
+                                              '<p>                     <b>Meninggal:  6072 <b/> '+
+                                            '</div>'+
+                                        '</div>'+
+                                      '</div>';
+
+          var contentString_West_Java = '<div id="content">'+
+                                      '<p style="margin-left:3px">12/05/2023 12:00 WIB'+
+                                      '<h1 style="font-size:20px;  margin-left:3px">West Java</h1>'+
+                                        '<div id="bodyContent">'+ 
+                                          '<div style="float:left; width:20%; margin-left:3px;"><img src="images/gambar_gedung/West_Java.jpg" width="120" height="80"/></div>' +
+                                            '<div style="float:right; width:45%;margin-top: -17px;">'+
+                                              '<p style="color:red"> <b>Total Kasus: 1231522 <b/> <br>'+
+                                              '<p style="color:green">    <b>Sembuh: 1205494 <b/> <br>'+
+                                              '<p>                     <b>Meninggal:  16090 <b/> '+
+                                            '</div>'+
+                                        '</div>'+
+                                      '</div>';
+
+          var contentString_West_Kalimantan = '<div id="content">'+
+                                      '<p style="margin-left:3px">12/05/2023 12:00 WIB'+
+                                      '<h1 style="font-size:20px;  margin-left:3px">West Kalimantan</h1>'+
+                                        '<div id="bodyContent">'+ 
+                                          '<div style="float:left; width:20%; margin-left:3px;"><img src="images/gambar_gedung/West_Kalimantan.jpg" width="120" height="80"/></div>' +
+                                            '<div style="float:right; width:45%;margin-top: -17px;">'+
+                                              '<p style="color:red"> <b>Total Kasus: 67451 <b/> <br>'+
+                                              '<p style="color:green">    <b>Sembuh: 66178 <b/> <br>'+
+                                              '<p>                     <b>Meninggal:  1146 <b/> '+
+                                            '</div>'+
+                                        '</div>'+
+                                      '</div>';
+
+          var contentString_West_Nusa_Tenggara = '<div id="content">'+
+                                      '<p style="margin-left:3px">12/05/2023 12:00 WIB'+
+                                      '<h1 style="font-size:20px;  margin-left:3px">West Nusa Tenggara</h1>'+
+                                        '<div id="bodyContent">'+ 
+                                          '<div style="float:left; width:20%; margin-left:3px;"><img src="images/gambar_gedung/West_Nusa_Tenggara.jpg" width="120" height="80"/></div>' +
+                                            '<div style="float:right; width:45%;margin-top: -17px;">'+
+                                              '<p style="color:red"> <b>Total Kasus: 37266 <b/> <br>'+
+                                              '<p style="color:green">    <b>Sembuh: 36271 <b/> <br>'+
+                                              '<p>                     <b>Meninggal:  933 <b/> '+
+                                            '</div>'+
+                                        '</div>'+
+                                      '</div>';
+
+          var contentString_West_Papua = '<div id="content">'+
+                                      '<p style="margin-left:3px">12/05/2023 12:00 WIB'+
+                                      '<h1 style="font-size:20px;  margin-left:3px">West Papua</h1>'+
+                                        '<div id="bodyContent">'+ 
+                                          '<div style="float:left; width:20%; margin-left:3px;"><img src="images/gambar_gedung/West_Papua.jpg" width="120" height="80"/></div>' +
+                                            '<div style="float:right; width:45%;margin-top: -17px;">'+
+                                              '<p style="color:red"> <b>Total Kasus: 32972 <b/> <br>'+
+                                              '<p style="color:green">    <b>Sembuh: 32515 <b/> <br>'+
+                                              '<p>                     <b>Meninggal:  393 <b/> '+
+                                            '</div>'+
+                                        '</div>'+
+                                      '</div>';
+
+          var contentString_West_Sulawesi = '<div id="content">'+
+                                      '<p style="margin-left:3px">12/05/2023 12:00 WIB'+
+                                      '<h1 style="font-size:20px;  margin-left:3px">West Sulawesi</h1>'+
+                                        '<div id="bodyContent">'+ 
+                                          '<div style="float:left; width:20%; margin-left:3px;"><img src="images/gambar_gedung/West_Sulawesi.jpg" width="120" height="80"/></div>' +
+                                            '<div style="float:right; width:45%;margin-top: -17px;">'+
+                                              '<p style="color:red"> <b>Total Kasus: 16038 <b/> <br>'+
+                                              '<p style="color:green">    <b>Sembuh: 15619 <b/> <br>'+
+                                              '<p>                     <b>Meninggal:  407 <b/> '+
+                                            '</div>'+
+                                        '</div>'+
+                                      '</div>';
+
+          var contentString_West_Sumatera = '<div id="content">'+
+                                      '<p style="margin-left:3px">12/05/2023 12:00 WIB'+
+                                      '<h1 style="font-size:20px;  margin-left:3px">West Sulawesi</h1>'+
+                                        '<div id="bodyContent">'+ 
+                                          '<div style="float:left; width:20%; margin-left:3px;"><img src="images/gambar_gedung/West_Sumatera.jpg" width="120" height="80"/></div>' +
+                                            '<div style="float:right; width:45%;margin-top: -17px;">'+
+                                              '<p style="color:red"> <b>Total Kasus: 105635 <b/> <br>'+
+                                              '<p style="color:green">    <b>Sembuh: 103046 <b/> <br>'+
+                                              '<p>                     <b>Meninggal:  2420 <b/> '+
+                                            '</div>'+
+                                        '</div>'+
+                                      '</div>';
+
+          
+      
+          // Add info window
+          const infowindow_Aceh = new google.maps.InfoWindow({content: contentString_Aceh});
+          const infowindow_Bali = new google.maps.InfoWindow({content: contentString_Bali});
+          const infowindow_Bangka_Belitung = new google.maps.InfoWindow({content: contentString_Bangka_Belitung});
+          const infowindow_Banten = new google.maps.InfoWindow({content: contentString_Banten});
+          const infowindow_Bengkulu = new google.maps.InfoWindow({content: contentString_Bengkulu});
+          const infowindow_Central_Java = new google.maps.InfoWindow({content: contentString_Central_Java});
+          const infowindow_Central_Kalimantan = new google.maps.InfoWindow({content: contentString_Central_Kalimantan});
+          const infowindow_Central_Sulawesi = new google.maps.InfoWindow({content: contentString_Central_Sulawesi});
+          const infowindow_East_Java = new google.maps.InfoWindow({content: contentString_East_Java});
+          const infowindow_East_Kalimantan = new google.maps.InfoWindow({content: contentString_East_Kalimantan});
+          const infowindow_East_Nusa_Tenggara = new google.maps.InfoWindow({content: contentString_East_Nusa_Tenggara});
+          const infowindow_Gorontalo = new google.maps.InfoWindow({content: contentString_Gorontalo});
+          const infowindow_Jakarta = new google.maps.InfoWindow({content: contentString_Jakarta});
+          const infowindow_Jambi = new google.maps.InfoWindow({content: contentString_Jambi});
+          const infowindow_Lampung = new google.maps.InfoWindow({content: contentString_Lampung});
+          const infowindow_Maluku = new google.maps.InfoWindow({content: contentString_Maluku});
+          const infowindow_North_Kalimantan = new google.maps.InfoWindow({content: contentString_North_Kalimantan});
+          const infowindow_North_Maluku = new google.maps.InfoWindow({content: contentString_North_Maluku});
+          const infowindow_North_Sulawesi = new google.maps.InfoWindow({content: contentString_North_Sulawesi});
+          const infowindow_North_Sumatera = new google.maps.InfoWindow({content: contentString_North_Sumatera});
+          const infowindow_Papua = new google.maps.InfoWindow({content: contentString_Papua});
+          const infowindow_Riau = new google.maps.InfoWindow({content: contentString_Riau});
+          const infowindow_Riau_Islands = new google.maps.InfoWindow({content: contentString_Riau_Islands});
+          const infowindow_South_Kalimantan = new google.maps.InfoWindow({content: contentString_South_Kalimantan});
+          const infowindow_South_Sulawesi = new google.maps.InfoWindow({content: contentString_South_Sulawesi});
+          const infowindow_South_Sumatera = new google.maps.InfoWindow({content: contentString_South_Sumatera});
+          const infowindow_Southeast_Sulawesi = new google.maps.InfoWindow({content: contentString_Southeast_Sulawesi});
+          const infowindow_Yogyakarta = new google.maps.InfoWindow({content: contentString_Yogyakarta});
+          const infowindow_West_Java = new google.maps.InfoWindow({content: contentString_West_Java});
+          const infowindow_West_Kalimantan = new google.maps.InfoWindow({content: contentString_West_Kalimantan});
+          const infowindow_West_Nusa_Tenggara = new google.maps.InfoWindow({content: contentString_West_Nusa_Tenggara});
+          const infowindow_West_Papua = new google.maps.InfoWindow({content: contentString_West_Papua});
+          const infowindow_West_Sulawesi = new google.maps.InfoWindow({content: contentString_West_Sulawesi});
+          const infowindow_West_Sumatera = new google.maps.InfoWindow({content: contentString_West_Sumatera});
+        
+          // The marker, positioned at selected location
+          const marker_Aceh = new google.maps.Marker({position: Aceh, map: map, title: 'Aceh', icon: "images/logo_kota/Aceh.png"});
+          const marker_Bali = new google.maps.Marker({position: Bali, map: map, title: 'Bali', icon: "images/logo_kota/Bali.png"});
+          const marker_Bangka_Belitung = new google.maps.Marker({position: Bangka_Belitung, map: map, title: 'Bangka Belitung', icon: "images/logo_kota/Bangka_Belitung.png"});
+          const marker_Banten = new google.maps.Marker({position: Banten, map: map, title: 'Banten', icon: "images/logo_kota/Banten.png"});
+          const marker_Bengkulu = new google.maps.Marker({position: Bengkulu, map: map, title: 'Bengkulu', icon: "images/logo_kota/Bengkulu.png"});
+          const marker_Central_Java = new google.maps.Marker({position: Central_Java, map: map, title: 'Central Java', icon: "images/logo_kota/Central_Java.png"});
+          const marker_Central_Kalimantan = new google.maps.Marker({position: Central_Kalimantan, map: map, title: 'Central Kalimantan', icon: "images/logo_kota/Central_Kalimantan.png"});
+          const marker_Central_Sulawesi = new google.maps.Marker({position: Central_Sulawesi, map: map, title: 'Central Sulawesi', icon: "images/logo_kota/Central_Sulawesi.png"});
+          const marker_East_Java = new google.maps.Marker({position: East_Java, map: map, title: 'East Java', icon: "images/logo_kota/East_Java.png"});
+          const marker_East_Kalimantan = new google.maps.Marker({position: East_Kalimantan, map: map, title: 'East Kalimantan', icon: "images/logo_kota/East_Kalimantan.png"});
+          const marker_East_Nusa_Tenggara = new google.maps.Marker({position: East_Nusa_Tenggara, map: map, title: 'East Nusa Tenggara', icon: "images/logo_kota/East_Nusa_Tenggara.png"});
+          const marker_Gorontalo = new google.maps.Marker({position: Gorontalo, map: map, title: 'Gorontalo', icon: "images/logo_kota/Gorontalo.png"});
+          const marker_Jakarta = new google.maps.Marker({position: Jakarta, map: map, title: 'Jakarta', icon: "images/logo_kota/Jakarta.png"});
+          const marker_Jambi = new google.maps.Marker({position: Jambi, map: map, title: 'Jambi', icon: "images/logo_kota/Jambi.png"});
+          const marker_Lampung = new google.maps.Marker({position: Lampung, map: map, title: 'Lampung', icon: "images/logo_kota/Lampung.png"});
+          const marker_Maluku = new google.maps.Marker({position: Maluku, map: map, title: 'Maluku', icon: "images/logo_kota/Maluku.png"});
+          const marker_North_Kalimantan = new google.maps.Marker({position: North_Kalimantan, map: map, title: 'North Kalimantan', icon: "images/logo_kota/North_Kalimantan.png"});
+          const marker_North_Maluku = new google.maps.Marker({position: North_Maluku, map: map, title: 'North Maluku', icon: "images/logo_kota/North_Maluku.png"});
+          const marker_North_Sulawesi = new google.maps.Marker({position: North_Sulawesi, map: map, title: 'North Sulawesi', icon: "images/logo_kota/North_Sulawesi.png"});
+          const marker_North_Sumatera = new google.maps.Marker({position: North_Sumatera, map: map, title: 'North Sumatera', icon: "images/logo_kota/North_Sumatera.png"});
+          const marker_Papua = new google.maps.Marker({position: Papua, map: map, title: 'Papua', icon: "images/logo_kota/Papua.png"});
+          const marker_Riau = new google.maps.Marker({position: Riau, map: map, title: 'Riau', icon: "images/logo_kota/Riau.png"});
+          const marker_Riau_Islands = new google.maps.Marker({position: Riau_Islands, map: map, title: 'Riau Islands', icon: "images/logo_kota/Riau_Islands.png"});
+          const marker_South_Kalimantan = new google.maps.Marker({position: South_Kalimantan, map: map, title: 'South Kalimantan', icon: "images/logo_kota/South_Kalimantan.png"});
+          const marker_South_Sulawesi = new google.maps.Marker({position: South_Sulawesi, map: map, title: 'South Sulawesi', icon: "images/logo_kota/South_Sulawesi.png"});
+          const marker_South_Sumatera = new google.maps.Marker({position: South_Sumatera, map: map, title: 'South Sumatera', icon: "images/logo_kota/South_Sumatera.png"});
+          const marker_Southeast_Sulawesi = new google.maps.Marker({position: Southeast_Sulawesi, map: map, title: 'Southeast Sulawesi', icon: "images/logo_kota/Southeast_Sulawesi.png"});
+          const marker_Yogyakarta = new google.maps.Marker({position: Yogyakarta, map: map, title: 'Yogyakarta', icon: "images/logo_kota/Yogyakarta.png"});
+          const marker_West_Java = new google.maps.Marker({position: West_Java, map: map, title: 'West Java', icon: "images/logo_kota/West_Java.png"});
+          const marker_West_Kalimantan = new google.maps.Marker({position: West_Kalimantan, map: map, title: 'West Kalimantan', icon: "images/logo_kota/West_Kalimantan.png"});
+          const marker_West_Nusa_Tenggara = new google.maps.Marker({position: West_Nusa_Tenggara, map: map, title: 'West Nusa Tenggara', icon: "images/logo_kota/West_Nusa_Tenggara.png"});
+          const marker_West_Papua = new google.maps.Marker({position: West_Papua, map: map, title: 'West Papua', icon: "images/logo_kota/West_Papua.png"});
+          const marker_West_Sulawesi = new google.maps.Marker({position: West_Sulawesi, map: map, title: 'West Sulawesi', icon: "images/logo_kota/West_Sulawesi.png"});
+          const marker_West_Sumatera = new google.maps.Marker({position: West_Sumatera, map: map, title: 'West Sumatera', icon: "images/logo_kota/West_Sumatera.png"});
+
+          // Marker click event: open info window
+          google.maps.event.addListener(marker_Aceh, 'click', function() {infowindow_Aceh.open(map, marker_Aceh);});
+          google.maps.event.addListener(marker_Bali, 'click', function() {infowindow_Bali.open(map, marker_Bali);});
+          google.maps.event.addListener(marker_Bangka_Belitung, 'click', function() {infowindow_Bangka_Belitung.open(map, marker_Bangka_Belitung);});
+          google.maps.event.addListener(marker_Banten, 'click', function() {infowindow_Bangka_Belitung.open(map, marker_Banten);});
+          google.maps.event.addListener(marker_Bengkulu, 'click', function() {infowindow_Bengkulu.open(map, marker_Bengkulu);});
+          google.maps.event.addListener(marker_Central_Java, 'click', function() {infowindow_Central_Java.open(map, marker_Central_Java);});
+          google.maps.event.addListener(marker_Central_Kalimantan, 'click', function() {infowindow_Central_Kalimantan.open(map, marker_Central_Kalimantan);});
+          google.maps.event.addListener(marker_Central_Sulawesi, 'click', function() {infowindow_Central_Sulawesi.open(map, marker_Central_Sulawesi);});
+          google.maps.event.addListener(marker_East_Java, 'click', function() {infowindow_East_Java.open(map, marker_East_Java);});
+          google.maps.event.addListener(marker_East_Kalimantan, 'click', function() {infowindow_East_Kalimantan.open(map, marker_East_Kalimantan);});
+          google.maps.event.addListener(marker_East_Nusa_Tenggara, 'click', function() {infowindow_East_Nusa_Tenggara.open(map, marker_East_Nusa_Tenggara);});
+          google.maps.event.addListener(marker_Gorontalo, 'click', function() {infowindow_Gorontalo.open(map, marker_Gorontalo);});
+          google.maps.event.addListener(marker_Jakarta, 'click', function() {infowindow_Jakarta.open(map, marker_Jakarta);});
+          google.maps.event.addListener(marker_Jambi, 'click', function() {infowindow_Jambi.open(map, marker_Jambi);});
+          google.maps.event.addListener(marker_Lampung, 'click', function() {infowindow_Lampung.open(map, marker_Lampung);});
+          google.maps.event.addListener(marker_Maluku, 'click', function() {infowindow_Maluku.open(map, marker_Maluku);});
+          google.maps.event.addListener(marker_North_Kalimantan, 'click', function() {infowindow_North_Kalimantan.open(map, marker_North_Kalimantan);});
+          google.maps.event.addListener(marker_North_Maluku, 'click', function() {infowindow_North_Maluku.open(map, marker_North_Maluku);});
+          google.maps.event.addListener(marker_North_Sulawesi, 'click', function() {infowindow_North_Sulawesi.open(map, marker_North_Sulawesi);});
+          google.maps.event.addListener(marker_North_Sumatera, 'click', function() {infowindow_North_Sumatera.open(map, marker_North_Sumatera);});
+          google.maps.event.addListener(marker_Papua, 'click', function() {infowindow_Papua.open(map, marker_Papua);});
+          google.maps.event.addListener(marker_Riau, 'click', function() {infowindow_Riau.open(map, marker_Riau);});
+          google.maps.event.addListener(marker_Riau_Islands, 'click', function() {infowindow_Riau_Islands.open(map, marker_Riau_Islands);});
+          google.maps.event.addListener(marker_South_Kalimantan, 'click', function() {infowindow_South_Kalimantan.open(map, marker_South_Kalimantan);});
+          google.maps.event.addListener(marker_South_Sulawesi, 'click', function() {infowindow_South_Sulawesi.open(map, marker_South_Sulawesi);});
+          google.maps.event.addListener(marker_South_Sumatera, 'click', function() {infowindow_South_Sumatera.open(map, marker_South_Sumatera);});
+          google.maps.event.addListener(marker_Southeast_Sulawesi, 'click', function() {infowindow_Southeast_Sulawesi.open(map, marker_Southeast_Sulawesi);});
+          google.maps.event.addListener(marker_Yogyakarta, 'click', function() {infowindow_Yogyakarta.open(map, marker_Yogyakarta);});
+          google.maps.event.addListener(marker_West_Java, 'click', function() {infowindow_West_Java.open(map, marker_West_Java);});
+          google.maps.event.addListener(marker_West_Kalimantan, 'click', function() {infowindow_West_Kalimantan.open(map, marker_West_Kalimantan);});
+          google.maps.event.addListener(marker_West_Nusa_Tenggara, 'click', function() {infowindow_West_Nusa_Tenggara.open(map, marker_West_Nusa_Tenggara);});
+          google.maps.event.addListener(marker_West_Papua, 'click', function() {infowindow_West_Papua.open(map, marker_West_Papua);});
+          google.maps.event.addListener(marker_West_Sulawesi, 'click', function() {infowindow_West_Sulawesi.open(map, marker_West_Sulawesi);});
+          google.maps.event.addListener(marker_West_Sumatera, 'click', function() {infowindow_West_Sumatera.open(map, marker_West_Sumatera);});
+
+      }
+      
+    window.initMap = initMap;
+    </script>
+
+  </head>
+  <body>
+    <div class="container">
+      <h1 style="text-align: center;font-family: Helvetica;">Peta Sebaran COVID-19 di Indonesia: Jum'at, 12 Mei 2023</h1>
+      <p style="text-align: center;font-family: Helvetica;font-size: small;">Created by: Erdin Nurjaman</p>
+    </div>
+
+    <!-- DIV element to embedd map -->
+    <div id="mapCanvas">
+
+    </div>
+
+  </body>
+</html>
